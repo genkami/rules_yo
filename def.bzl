@@ -10,11 +10,14 @@ def _yo_impl(ctx):
     env["OUT"] = ctx.outputs.out.path
     env["PACKAGE"] = ctx.attr.package
     env["GODIR"] = godir
+    if ctx.attr.template != None:
+        base = ctx.attr.template.files.to_list()[0]
+        env["TEMPLATE_DIR"] = base.path[:-1 - len(base.basename)]
 
     ctx.actions.run(
         inputs = ctx.files.schema,
         outputs = [ctx.outputs.out],
-        tools = ctx.files._yo_executable + [go.go],
+        tools = ctx.files._yo_executable + [go.go] + ctx.files.template,
         env = env,
         executable = ctx.executable._yo_runner,
     )
@@ -32,6 +35,7 @@ yo = rule(
         "package": attr.string(
             mandatory = True,
         ),
+        "template": attr.label(),
         "_yo_runner": attr.label(
             default = "//:yo.tmpl.bash",
             executable = True,
