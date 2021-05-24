@@ -1,2 +1,2 @@
 # rules_yo
-Bazel rules to genereate .go files from Sapnner schema
+Bazel rules to generate .go files from Spanner schema
