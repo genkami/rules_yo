@@ -1,0 +1,7 @@
+exports_files(
+    [
+        "def.bzl",
+        "yo.tmpl.bash",
+    ],
+    visibility = ["//visibility:public"],
+)
