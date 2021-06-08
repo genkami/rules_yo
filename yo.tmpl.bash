@@ -2,6 +2,7 @@
 
 export PATH="$(pwd)/${GODIR}:${PATH}"
 source <("$(pwd)/${GODIR}/go" env)
+export GOPATH="$(pwd)/${GODIR}/go"
 
 YO_OPTS=""
 if [[ -n "${TEMPLATE_DIR}" ]]; then
